@@ -60,6 +60,9 @@ k8s-curl-test:
 run: build
 	${BUILD_DIR}/${BINARY_NAME}
 
+docker-run: build-docker
+	docker run --env-file .env --rm  --restart no -p 5000:5000 ghcr.io/${GITHUB_USERNAME}/${BINARY_NAME}:${DOCKER_IMAGE_TAG}
+
 clean: $(BUILD_DIR)
 	go clean || true
 	if [ -f $</${BINARY_NAME} ]; then \
