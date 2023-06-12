@@ -108,24 +108,31 @@ ok  	github.com/tcuthbert/stockticker/webserver	1.006s
 
 ## Deployment
 
-##### Dump the k8s config for a given stage
+#### Dump the k8s config for a given stage
 
 ```
 : STAGE=(prod|dev)
 make k8s-kustomize-${STAGE:=dev}
 ```
 
-##### Deploy stage into k8s cluster
+#### Deploy stage into k8s cluster
 
 ```
 : STAGE=(prod|dev)
 make k8s-deploy-${STAGE:=dev}
-
 kubectl create -k kubernetes/dev/
 configmap/stockticker-configmap created
 secret/stockticker-apikey-5h4bmcf57t created
 service/stockticker-service created
 deployment.apps/stockticker-deployment created
+ingress.networking.k8s.io/stockticker-ingress created
+```
+
+##### Testing the k8s ingress
+
+```
+❯ curl -s -H 'Host: stockticker.com' http://localhost/
+{"Meta Data":{"1. Information":"Daily...
 ```
 
 [^1]: I used microk8s for this project
