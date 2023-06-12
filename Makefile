@@ -46,16 +46,16 @@ push-docker:
 	docker push ghcr.io/${GITHUB_USERNAME}/${BINARY_NAME}:${DOCKER_IMAGE_TAG} 
 
 k8s-deploy-%: $(K8S_APIKEY)
-	mkctl create -k kubernetes/$(*F)/
+	kubectl create -k kubernetes/$(*F)/
 
 k8s-delete-dev: $(K8S_APIKEY)
-	mkctl delete -k kubernetes/dev/
+	kubectl delete -k kubernetes/dev/
 
 k8s-kustomize-%: $(K8S_APIKEY)
-	mkctl kustomize kubernetes/$(*F)/
+	kubectl kustomize kubernetes/$(*F)/
 
 k8s-curl-test:
-	@mkctl get svc | awk '/^stockticker/{printf "http://%s", $$3}' | xargs curl -s | jq .
+	@kubectl get svc | awk '/^stockticker/{printf "http://%s", $$3}' | xargs curl -s | jq .
 
 run: build
 	${BUILD_DIR}/${BINARY_NAME}
