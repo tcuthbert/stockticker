@@ -95,6 +95,16 @@ webserver: 2023/06/12 11:39:22 Server is ready to handle requests at: :5000
 docker build --no-cache -t ghcr.io/tcuthbert/stockticker:1.0.0 .
 ```
 
+###### Running the docker image
+
+```
+❯ make docker-run DOCKER_FLAGS=""
+docker build  -t ghcr.io/tcuthbert/stockticker:1.1.0-1-g07490f7-dirty .
+[+] Building 9.6s (20/20) FINISHED
+docker run --env-file .env --rm  --restart no -p 5000:5000 ghcr.io/tcuthbert/stockticker:1.1.0-1-g07490f7-dirty
+webserver: 2023/06/12 06:28:04 Server is ready to handle requests at: :5000
+```
+
 ## Testing
 
 ```
