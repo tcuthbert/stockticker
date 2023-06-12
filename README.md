@@ -79,11 +79,20 @@ sudo apt-get install -y git make
 
 ## Building
 
+##### Binary
+
 ```
 ❯ make build run
 GOARCH=amd64 GOOS=linux go build -ldflags "-X main.VERSION=v0.1.0-4-g66f1784 -X main.COMMIT=66f1784cf6a8ef01e7fe1821b7820d8b92555745 -X main.BRANCH=readme" -o /home/tom/Projects/stockticker//build/stockticker .
 /home/tom/Projects/stockticker//build/stockticker
 webserver: 2023/06/12 11:39:22 Server is ready to handle requests at: :5000
+```
+
+##### Docker container
+
+```
+❯ make build-docker
+docker build --no-cache -t ghcr.io/tcuthbert/stockticker:1.0.0 .
 ```
 
 ## Testing
