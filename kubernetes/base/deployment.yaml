@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stockticker-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      deployment: stockticker
+  template:
+    metadata:
+      labels:
+        deployment: stockticker
+    spec:
+      containers:
+      - name: stockticker
+        image: ghcr.io/tcuthbert/stockticker
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: stockticker-apikey-volume 
+            mountPath: /run/stockticker-secrets
+            readOnly: true
+        command: ["/app/stockticker"]
+        args: ["-api-keyfile", "/run/stockticker-secrets/apikey.txt"]
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
+          failureThreshold: 3
+          successThreshold: 1
+        ports:
+        - containerPort: 5000
+        env:
+        - name: SYMBOL
+          valueFrom:
+            configMapKeyRef:
+              name: stockticker-configmap
+              key: symbol
+        - name: NDAYS
+          valueFrom:
+            configMapKeyRef:
+              name: stockticker-configmap
+              key: ndays
+      volumes:
+      - name: stockticker-apikey-volume
+        secret:
+          secretName: stockticker-apikey 
