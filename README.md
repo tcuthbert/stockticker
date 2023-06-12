@@ -22,7 +22,7 @@ Usage of ./build/stockticker:
 ### Starting the server
 
 ```
-SYMBOL=MSFT NDAYS=7 ./stockticker -api-keyfile ./apikey.txt
+SYMBOL=IBM NDAYS=7 ./stockticker -api-keyfile ./apikey.txt
 webserver: 2023/06/12 11:34:12 Server is ready to handle requests at: :5000
 webserver: 2023/06/12 11:34:28 INFO: response time=1.131412083s
 ```
@@ -31,7 +31,7 @@ webserver: 2023/06/12 11:34:28 INFO: response time=1.131412083s
 
 ```
 ❯ curl -s http://localhost:5000
-{"Meta Data":{"1. Information":"Daily Time Series with Splits and Dividend Events","2. Symbol":"MSFT","3. Last Refreshed":"2023-06-09","4. Output Size":"Compact","5. Time Zone":"US/Eastern"},"Time Series (Daily)":{"2023-06-01":{"1. open":"325.93","2. high":"333.53","3. low":"324.72","4. close":"332.58","6. volume":"26773851"},"2023-06-02":{"1. open":"334.247","2. high":"337.5","3. low":"332.55","4. close":"335.4","6. volume":"25873769"},"2023-06-05":{"1. open":"335.22","2. high":"338.5599","3. low":"334.6601","4. close":"335.94","6. volume":"21307053"},"2023-06-06":{"1. open":"335.33","2. high":"335.37","3. low":"332.17","4. close":"333.68","6. volume":"20396223"},"2023-06-07":{"1. open":"331.65","2. high":"334.49","3. low":"322.5","4. close":"323.38","6. volume":"40717129"},"2023-06-08":{"1. open":"323.935","2. high":"326.64","3. low":"323.35","4. close":"325.26","6. volume":"23277708"},"2023-06-09":{"1. open":"324.99","2. high":"329.99","3. low":"324.41","4. close":"326.79","6. volume":"22528950"}},"ClosingAverage":"330.43"}
+{"Meta Data":{"1. Information":"Daily Time Series with Splits and Dividend Events","2. Symbol":"IBM","3. Last Refreshed":"2023-06-09","4. Output Size":"Compact","5. Time Zone":"US/Eastern"},"Time Series (Daily)":{"2023-06-01":{"1. open":"128.44","2. high":"130.145","3. low":"127.78","4. close":"129.82","6. volume":"4136086"},"2023-06-02":{"1. open":"130.38","2. high":"133.12","3. low":"130.15","4. close":"132.42","6. volume":"5375796"},"2023-06-05":{"1. open":"133.12","2. high":"133.58","3. low":"132.27","4. close":"132.64","6. volume":"3993516"},"2023-06-06":{"1. open":"132.43","2. high":"132.94","3. low":"131.88","4. close":"132.69","6. volume":"3297951"},"2023-06-07":{"1. open":"132.5","2. high":"134.44","3. low":"132.19","4. close":"134.38","6. volume":"5772024"},"2023-06-08":{"1. open":"134.69","2. high":"135.98","3. low":"134.01","4. close":"134.41","6. volume":"4128939"},"2023-06-09":{"1. open":"134.36","2. high":"136.1","3. low":"134.17","4. close":"135.3","6. volume":"3981748"}},"ClosingAverage":"133.09"}
 ```
 
 ## Project goals
