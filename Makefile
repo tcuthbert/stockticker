@@ -54,11 +54,17 @@ k8s-delete-dev: $(K8S_APIKEY)
 k8s-kustomize-%: $(K8S_APIKEY)
 	kubectl kustomize kubernetes/$(*F)/
 
-k8s-curl-test:
-	@kubectl get svc | awk '/^stockticker/{printf "http://%s", $$3}' | xargs curl -s | jq .
+k8s-curl-ingress-test:
+	curl -s -H 'Host: stockticker.com' http://localhost/
+
+k8s-curl-svc-test:
+	kubectl get svc | awk '/^stockticker/{printf "http://%s:%d", $$3, $$5}' | xargs curl -s
 
 run: build
 	${BUILD_DIR}/${BINARY_NAME}
+
+docker-run: build-docker
+	docker run --env-file .env --rm  --restart no -p 5000:5000 ghcr.io/${GITHUB_USERNAME}/${BINARY_NAME}:${DOCKER_IMAGE_TAG}
 
 clean: $(BUILD_DIR)
 	go clean || true
