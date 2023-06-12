@@ -54,6 +54,9 @@ k8s-delete-dev: $(K8S_APIKEY)
 k8s-kustomize-%: $(K8S_APIKEY)
 	kubectl kustomize kubernetes/$(*F)/
 
+k8s-curl-ingress-test:
+	curl -s -H 'Host: stockticker.com' http://localhost/
+
 k8s-curl-svc-test:
 	kubectl get svc | awk '/^stockticker/{printf "http://%s:%d", $$3, $$5}' | xargs curl -s
 
